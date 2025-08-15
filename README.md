@@ -1,27 +1,27 @@
 # 🫁 Lung Cancer Prediction using Deep Learning
 
 
-📌 Project Overview
+## 📌 Project Overview
 
 This project uses deep learning to classify CT scan images as cancerous or non-cancerous, assisting radiologists in early and accurate lung cancer detection.
 
-Objective: Detect lung cancer from CT scan images.
+* Objective: Detect lung cancer from CT scan images.
 
-Model Used: Pre-trained VGG16 CNN architecture (fine-tuned).
+* Model Used: Pre-trained VGG16 CNN architecture (fine-tuned).
 
-Dataset: LIDC-IDRI or custom-labeled CT scan images.
+* Dataset: LIDC-IDRI or custom-labeled CT scan images.
 
-Framework: TensorFlow / Keras
+* Framework: TensorFlow / Keras
 
-📁 Dataset Description
+## 📁 Dataset Description
 
-Classes:
+* Classes:
 
 0: Non-cancerous
 
 1: Cancerous
 
-Preprocessing Steps:
+* Preprocessing Steps:
 
 Resized images to 224x224 pixels
 
@@ -29,19 +29,19 @@ Normalized pixel values
 
 Optional data augmentation (rotation, flipping, zooming) for improved performance
 
-Dataset Source:
+* Dataset Source:
 
 LIDC-IDRI dataset on The Cancer Imaging Archive
 
 ⚠️ Note: Dataset not included due to size; users should download and place it in a dataset/ folder.
 
-🧠 Model Architecture
+## 🧠 Model Architecture
 
 The model uses a fine-tuned VGG16 architecture:
 
-Base Model: VGG16 (pre-trained on ImageNet, top layers removed)
+* Base Model: VGG16 (pre-trained on ImageNet, top layers removed)
 
-Added Layers:
+* Added Layers:
 
 GlobalAveragePooling2D
 
@@ -51,15 +51,15 @@ Dropout for regularization
 
 Dense output layer with Sigmoid activation for binary classification
 
-Loss Function: Binary Crossentropy
+* Loss Function: Binary Crossentropy
 
-Optimizer: Adam
+* Optimizer: Adam
 
-Metrics: Accuracy, Precision, Recall
+* Metrics: Accuracy, Precision, Recall
 
-🔧 Implementation Details
+## 🔧 Implementation Details
 
-1)Load and preprocess images
+### 1)Load and preprocess images
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
@@ -87,7 +87,7 @@ val_generator = train_datagen.flow_from_directory(
 )
 
 
-2)Build the model
+### 2)Build the model
 
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras.models import Model
@@ -103,18 +103,18 @@ predictions = Dense(1, activation='sigmoid')(x)
 model = Model(inputs=base_model.input, outputs=predictions)
 
 
-3)Compile and train
+### 3)Compile and train
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 history = model.fit(train_generator, validation_data=val_generator, epochs=25)
 
 
-4)Evaluate model
+### 4)Evaluate model
 
 model.evaluate(val_generator)
 
 
-5)Predict on new images
+### 5)Predict on new images
 
 from tensorflow.keras.preprocessing import image
 import numpy as np
@@ -125,7 +125,7 @@ img_array = np.expand_dims(img_array, axis=0)
 prediction = model.predict(img_array)
 print("Cancerous" if prediction[0][0]>0.5 else "Non-cancerous")
 
-# 📈 Results
+## 📈 Results
 
 Training Accuracy: ~95% (example)
 
@@ -133,7 +133,7 @@ Validation Accuracy: ~92% (example)
 
 Confusion matrix and ROC-AUC curve can be plotted to visualize performance.
 
-# 📝 Future Enhancements
+## 📝 Future Enhancements
 
 * Use other architectures like ResNet50, DenseNet121 for comparison
 
