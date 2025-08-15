@@ -59,7 +59,7 @@ Metrics: Accuracy, Precision, Recall
 
 🔧 Implementation Details
 
-Load and preprocess images
+1)Load and preprocess images
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
@@ -87,7 +87,7 @@ val_generator = train_datagen.flow_from_directory(
 )
 
 
-Build the model
+2)Build the model
 
 from tensorflow.keras.applications import VGG16
 from tensorflow.keras.models import Model
@@ -103,18 +103,18 @@ predictions = Dense(1, activation='sigmoid')(x)
 model = Model(inputs=base_model.input, outputs=predictions)
 
 
-Compile and train
+3)Compile and train
 
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 history = model.fit(train_generator, validation_data=val_generator, epochs=25)
 
 
-Evaluate model
+4)Evaluate model
 
 model.evaluate(val_generator)
 
 
-Predict on new images
+5)Predict on new images
 
 from tensorflow.keras.preprocessing import image
 import numpy as np
@@ -125,7 +125,7 @@ img_array = np.expand_dims(img_array, axis=0)
 prediction = model.predict(img_array)
 print("Cancerous" if prediction[0][0]>0.5 else "Non-cancerous")
 
-📈 Results
+# 📈 Results
 
 Training Accuracy: ~95% (example)
 
@@ -133,7 +133,7 @@ Validation Accuracy: ~92% (example)
 
 Confusion matrix and ROC-AUC curve can be plotted to visualize performance.
 
-📝 Future Enhancements
+# 📝 Future Enhancements
 
 * Use other architectures like ResNet50, DenseNet121 for comparison
 
